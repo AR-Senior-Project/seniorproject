@@ -58,6 +58,7 @@ public class UIManager : MonoBehaviour {
 
 	//loads inputted level
 	public void LoadLevel(string level) {
+		Time.timeScale = 1;	//reset time to normal
 		SceneManager.LoadScene(level);
 	}
 
@@ -66,6 +67,7 @@ public class UIManager : MonoBehaviour {
 	 * To test it, make a Build.
 	*/
 	public void Quit() {
+		Time.timeScale = 1; //reset time to normal
 		Application.Quit();
 	}
 }
