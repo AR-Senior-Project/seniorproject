@@ -4,8 +4,8 @@ using System.Collections;
 public class playerGravity : MonoBehaviour {
 
 	GameObject 		player;
-	GameObject 		sink;
-	GameObject[] 	sinks;
+	//GameObject 		sink;
+	GameObject[] 	manipulators;
 	float 	G;         	// Gravitational constant: use for scaling
 	float 	M;          // Mass of sink: use for pull intensity
 	Vector3 r;          // Radius vector between two objects
@@ -15,15 +15,19 @@ public class playerGravity : MonoBehaviour {
 	Vector3 dv;         // Change in velocity
 	float 	dt;        	// Time step
 
+	public float intensity; 	// determines how serious it pulls
+
 	// Use this for initialization
 	void Start () {
 		G = 0.1F;
-		M = 100;
-		dt = 0.1F;
+		if (intensity != 0)
+			dt = 1/intensity;
+		else
+			dt = 0.1F;
 
 		player = GameObject.FindWithTag("Player");
-		sinks = GameObject.FindGameObjectsWithTag("Sink");
-		sink = sinks [0];
+		manipulators = GameObject.FindGameObjectsWithTag("Manipulator");
+		//sink = sinks [0];
 		// Player starts with an initial velocity
 		v = new Vector3(-1, 0, 1);
 	}
@@ -31,9 +35,14 @@ public class playerGravity : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 A = new Vector3 (0, 0, 0);
-		foreach (GameObject sink in sinks) {
+		foreach (GameObject manipulator in manipulators) {
+
+			M = manipulator.GetComponent<configManipulator> ().intensity;
+			if (manipulator.GetComponent<configManipulator> ().isRepulsor) {
+				M *= -1;
+			}
 			// radius between the two objects
-			r = sink.transform.position - player.transform.position;
+			r = manipulator.transform.position - player.transform.position;
 			// magnitude of radius
 			R = r.magnitude;
 
