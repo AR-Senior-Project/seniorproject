@@ -20,16 +20,15 @@ public class playerGravity : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		G = 0.1F;
+		dt = 0.1F;
 		if (intensity != 0)
-			dt = 1/intensity;
-		else
-			dt = 0.1F;
-
+			G = intensity/100;
+		
 		player = GameObject.FindWithTag("Player");
 		manipulators = GameObject.FindGameObjectsWithTag("Manipulator");
 		//sink = sinks [0];
 		// Player starts with an initial velocity
-		v = new Vector3(-1, 0, 1);
+		v = new Vector3(0, 0, 0);
 	}
 
 	// Update is called once per frame
@@ -58,5 +57,15 @@ public class playerGravity : MonoBehaviour {
 
 		// player's new position is the old position + the change in position
 		player.transform.position += v*dt;
+	}
+
+	void OnCollisionEnter (Collision collision) {
+		foreach (ContactPoint contact in collision.contacts) {
+			Debug.DrawRay(contact.point, contact.normal, Color.white);
+			// mirror velocity vector over contact.normal
+			Vector3 n;
+			n = Vector3.Normalize(contact.normal); 
+			v = v - 2 * Vector3.Dot(v, n) * n;
+		}
 	}
 }
