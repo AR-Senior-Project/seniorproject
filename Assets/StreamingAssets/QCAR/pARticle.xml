@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
-    <ImageTarget name="board" size="20.000000 20.362225" />
-    <ImageTarget name="plus" size="16.000000 15.970205" />
-    <ImageTarget name="minus" size="16.000000 15.880374" />
+    <ImageTarget name="plus2" size="16.000000 15.876923" />
+    <ImageTarget name="minus2" size="16.000000 15.876209" />
+    <ImageTarget name="minus" size="16.000000 15.876448" />
+    <ImageTarget name="plus" size="16.000000 15.906977" />
+    <ImageTarget name="board" size="20.000000 20.106100" />
   </Tracking>
 </QCARConfig>
