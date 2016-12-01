@@ -20,7 +20,7 @@ namespace Vuforia
     
         #endregion // PRIVATE_MEMBER_VARIABLES
 
-
+        public bool boardVisible = false;
 
         #region UNTIY_MONOBEHAVIOUR_METHODS
     
@@ -75,7 +75,7 @@ namespace Vuforia
             //Enable physics:
             foreach (configManipulator component in gameObjects)
             {
-                component.intensity = 80;
+                component.intensity = 100;
             }
 
             // Enable rendering:
@@ -91,6 +91,10 @@ namespace Vuforia
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+            if (mTrackableBehaviour.TrackableName == "board")
+            {
+                boardVisible = true;
+            }
         }
 
 
@@ -119,6 +123,10 @@ namespace Vuforia
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+            if (mTrackableBehaviour.TrackableName == "board")
+            {
+                boardVisible = false;
+            }
         }
 
         #endregion // PRIVATE_METHODS
