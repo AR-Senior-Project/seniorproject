@@ -70,6 +70,13 @@ namespace Vuforia
         {
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
+            configManipulator[] gameObjects = GetComponentsInChildren<configManipulator>(true);
+
+            //Enable physics:
+            foreach (configManipulator component in gameObjects)
+            {
+                component.intensity = 80;
+            }
 
             // Enable rendering:
             foreach (Renderer component in rendererComponents)
@@ -91,6 +98,13 @@ namespace Vuforia
         {
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
+            configManipulator[] gameObjects = GetComponentsInChildren<configManipulator>(true);
+
+            //Enable physics:
+            foreach (configManipulator component in gameObjects)
+            {
+                component.intensity = 0;
+            }
 
             // Disable rendering:
             foreach (Renderer component in rendererComponents)
