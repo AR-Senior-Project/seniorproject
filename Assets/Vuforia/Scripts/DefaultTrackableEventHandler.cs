@@ -75,7 +75,7 @@ namespace Vuforia
             //Enable physics:
             foreach (configManipulator component in gameObjects)
             {
-                component.intensity = 100;
+                component.isOn = true;
             }
 
             // Enable rendering:
@@ -103,7 +103,7 @@ namespace Vuforia
             //Enable physics:
             foreach (configManipulator component in gameObjects)
             {
-                component.intensity = 0;
+                component.isOn = false;
             }
 
             // Disable rendering:

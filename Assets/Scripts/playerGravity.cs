@@ -16,7 +16,7 @@ public class playerGravity : MonoBehaviour {
 	Vector3 dv;         // Change in velocity
 	float 	dt;        	// Time step
 
-	public float intensity; 	// determines how serious it pulls
+	public float intensity = 0; 	// determines how serious it pulls
 
 	// Use this for initialization
 	void Start () {
@@ -37,7 +37,17 @@ public class playerGravity : MonoBehaviour {
 		Vector3 A = new Vector3 (0, 0, 0);
 		foreach (GameObject manipulator in manipulators) {
 
-			q1 = manipulator.GetComponent<configManipulator> ().intensity;
+            //if object is visible, set intensity, otherwise intensity = 0
+            if(manipulator.GetComponent<configManipulator>().isOn)
+            {
+                q1 = manipulator.GetComponent<configManipulator>().intensity;
+            }
+            else
+            {
+                q1 = 0;
+            }
+
+            
 			if (manipulator.GetComponent<configManipulator> ().isRepulsor) {
 				q1 *= -1;
 			}
