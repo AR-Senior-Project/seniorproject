@@ -8,7 +8,7 @@ public class Timer : MonoBehaviour {
     //DefaultTrackableEventHandler dteh;
     GameObject board;
     bool boardVisible = false;
-	float timeStart = 0f;
+	public float timeStart = 0f;
 	public Text timer;
 	// Use this for initialization
 	void Start () {
