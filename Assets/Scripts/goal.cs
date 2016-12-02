@@ -6,6 +6,7 @@ public class goal : MonoBehaviour {
 
 	public GameObject GoalText; //floating text on top of the goal
 	public UIManager uimanager;
+    public Score score;
 
 	// Use this for initialization
 	void Start () {
@@ -27,8 +28,9 @@ public class goal : MonoBehaviour {
         {
             //goal reached
             //print("GOALLL");
-			//text.text = "HIT";
-			uimanager.youWin = true; //turns on YouWin text
+            //text.text = "HIT";
+            score.addPoints();
+            uimanager.youWin = true; //turns on YouWin text
         }
     }
 	

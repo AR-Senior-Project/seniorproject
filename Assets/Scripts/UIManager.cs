@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour {
 	public void LoadLevel(int level) {
 		Time.timeScale = 1; //reset time to normal
 		//score.addPoints ((int)timer.timeStart * );
-		score.addPoints ((int)timer.timeStart * levelScore);
+		score.addPoints ();
 		SceneManager.LoadScene (level);
 	}
 
