@@ -61,7 +61,6 @@ public class playerGravity : MonoBehaviour {
 
 	void OnCollisionEnter (Collision collision) {
 		foreach (ContactPoint contact in collision.contacts) {
-			Debug.DrawRay(contact.point, contact.normal, Color.white);
 			// mirror velocity vector over contact.normal
 			Vector3 n;
 			n = Vector3.Normalize(contact.normal); 
