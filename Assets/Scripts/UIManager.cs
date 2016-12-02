@@ -1,15 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
 	GameObject[] pauseObjects;
+	GameObject[] winObjects;
+	public Score score;
+	public Timer timer;
+	public bool youWin = false;
+	public Text TotalScore;
+	int levelScore;
+
 	// Use this for initialization
 	void Start () {
 		Time.timeScale = 1;
 		pauseObjects = GameObject.FindGameObjectsWithTag ("ShowOnPause");
+		winObjects = GameObject.FindGameObjectsWithTag ("ShowOnWin");
 		hidePaused ();
+		hideWin ();
 	}
 	
 	// Update is called once per frame
@@ -23,6 +33,10 @@ public class UIManager : MonoBehaviour {
 				Time.timeScale = 1; //make time run normally
 				hidePaused ();
 			}
+		}
+		if(youWin) {
+			Time.timeScale = 0; //stop time
+			showWin ();
 		}
 	}
 
@@ -49,6 +63,14 @@ public class UIManager : MonoBehaviour {
 		}
 	}
 
+	//displays objects with ShowOnWin tag
+	public void showWin() {
+		foreach (GameObject g in winObjects) {
+			g.SetActive (true);
+		}
+		TotalScore.text = "Total Score: " + score.totalScore.ToString () + ((int)timer.timeStart).ToString() + " x " + levelScore.ToString ();
+	}
+
 	//hides objects with ShowOnPause tag
 	public void hidePaused() {
 		foreach (GameObject g in pauseObjects) {
@@ -56,10 +78,25 @@ public class UIManager : MonoBehaviour {
 		}
 	}
 
+	//hides objects with ShowOnWin tag
+	public void hideWin() {
+		foreach (GameObject g in winObjects) {
+			g.SetActive (false);
+		}
+	}
+
 	//loads inputted level
 	public void LoadLevel(string level) {
 		Time.timeScale = 1;	//reset time to normal
 		SceneManager.LoadScene(level);
+	}
+
+	//loads the next level
+	public void LoadLevel(int level) {
+		Time.timeScale = 1; //reset time to normal
+		//score.addPoints ((int)timer.timeStart * );
+		score.addPoints ((int)timer.timeStart * levelScore);
+		SceneManager.LoadScene (level);
 	}
 
 	/*

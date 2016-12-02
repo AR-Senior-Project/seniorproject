@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour {
     GameObject par;
     Renderer parRen;
     bool boardVisible = false;
-	float timeStart = 0f;
+	public float timeStart = 0f;
 	public Text timer;
     bool timerStart = false;
 	// Use this for initialization
