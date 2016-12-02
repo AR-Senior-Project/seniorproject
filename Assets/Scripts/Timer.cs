@@ -3,23 +3,42 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
-	
 	public UIManager uimanager;
-	float timeLeft = 0.0f;
+    GameObject par;
+    Renderer parRen;
+    bool boardVisible = false;
+	float timeStart = 0f;
 	public Text timer;
+    bool timerStart = false;
 	// Use this for initialization
 	void Start () {
-		timer.text = ((int)timeLeft).ToString ();
+        par = GameObject.FindGameObjectWithTag("Player");
+        parRen = par.GetComponent<Renderer>();
+        par.SetActive(false);
+		timer.text = ((int)timeStart).ToString ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		timeLeft += Time.deltaTime;
-		timer.text = ((int)timeLeft).ToString ();
-		/*
-		if(timeLeft < 0) {
-			uimanager.LoadLevel ("GameOver");
-		}
-		*/
-	}
+        //when player presses start, start timer and show particle
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            boardVisible = parRen.enabled;
+            print(boardVisible);
+            //don't do anything if space has already been pressed or board is not visible
+            if (!timerStart && boardVisible)
+            {
+                timerStart = true;
+                //enable particle
+                par.SetActive(true);
+            }
+        }
+        if (timerStart)
+        {
+
+            timeStart += Time.deltaTime;
+        }
+
+        timer.text = ((int)timeStart).ToString();
+    }
 }
