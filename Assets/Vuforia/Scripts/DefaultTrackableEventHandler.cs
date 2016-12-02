@@ -91,10 +91,6 @@ namespace Vuforia
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
-            if (mTrackableBehaviour.TrackableName == "board")
-            {
-                boardVisible = true;
-            }
         }
 
 
@@ -123,10 +119,6 @@ namespace Vuforia
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
-            if (mTrackableBehaviour.TrackableName == "board")
-            {
-                boardVisible = false;
-            }
         }
 
         #endregion // PRIVATE_METHODS
