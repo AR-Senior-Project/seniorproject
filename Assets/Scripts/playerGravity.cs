@@ -78,8 +78,11 @@ public class playerGravity : MonoBehaviour {
 		foreach (ContactPoint contact in collision.contacts) {
 			// mirror velocity vector over contact.normal
 			Vector3 n;
-			n = Vector3.Normalize(contact.normal); 
+			n = player.transform.InverseTransformVector (contact.normal);
+			n = Vector3.Normalize (n);
 			v = v - 2 * Vector3.Dot(v, n) * n;
 		}
+		v = Vector3.Scale (v, new Vector3 (1, 0, 1));
+		player.transform.position += player.transform.TransformVector(v*dt);
 	}
 }
