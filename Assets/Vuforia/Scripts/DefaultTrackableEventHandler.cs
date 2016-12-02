@@ -75,7 +75,7 @@ namespace Vuforia
             //Enable physics:
             foreach (configManipulator component in gameObjects)
             {
-                component.intensity = 100;
+                component.isOn = true;
             }
 
             // Enable rendering:
@@ -91,10 +91,6 @@ namespace Vuforia
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
-            if (mTrackableBehaviour.TrackableName == "board")
-            {
-                boardVisible = true;
-            }
         }
 
 
@@ -107,7 +103,7 @@ namespace Vuforia
             //Enable physics:
             foreach (configManipulator component in gameObjects)
             {
-                component.intensity = 0;
+                component.isOn = false;
             }
 
             // Disable rendering:
@@ -123,10 +119,6 @@ namespace Vuforia
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
-            if (mTrackableBehaviour.TrackableName == "board")
-            {
-                boardVisible = false;
-            }
         }
 
         #endregion // PRIVATE_METHODS

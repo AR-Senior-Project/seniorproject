@@ -4,40 +4,41 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
 	public UIManager uimanager;
-    //public board ar;
-    //DefaultTrackableEventHandler dteh;
-    GameObject board;
+    GameObject par;
+    Renderer parRen;
     bool boardVisible = false;
 	public float timeStart = 0f;
 	public Text timer;
+    bool timerStart = false;
 	// Use this for initialization
 	void Start () {
-        board = GameObject.FindGameObjectWithTag("EditorOnly");
-        //bool boardVisible = board.GetComponent("DefaultTrackableEventHandler").boardVisible;
-        //DefaultTrackableEventHandler dteh = board.GetComponent(typeof(DefaultTrackableEventHandler)) as DefaultTrackableEventHandler;
+        par = GameObject.FindGameObjectWithTag("Player");
+        parRen = par.GetComponent<Renderer>();
+        par.SetActive(false);
 		timer.text = ((int)timeStart).ToString ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-        //boardVisible = board.GetComponentsInChildren<Renderer>().enabl;
-        //boardVisible = dteh.boardVisible;
-        /*print("IS it visible:" + boardVisible);
-        if (boardVisible)
+        //when player presses space, start timer and show particle
+        if(Input.GetKeyDown(KeyCode.Space))
         {
-            //time go
+            boardVisible = parRen.enabled;
+            print(boardVisible);
+            //don't do anything if space has already been pressed or board is not visible
+            if (!timerStart && boardVisible)
+            {
+                timerStart = true;
+                //enable particle
+                par.SetActive(true);
+            }
+        }
+        if (timerStart)
+        {
+
             timeStart += Time.deltaTime;
         }
-        else
-        {
-            //do nothing
-        } */
-        timeStart += Time.deltaTime;
-        timer.text = ((int)timeStart).ToString ();
-        /*
-		if(timeStart < 0) {
-			uimanager.LoadLevel ("GameOver");
-		} */
-	}
+
+        timer.text = ((int)timeStart).ToString();
+    }
 }

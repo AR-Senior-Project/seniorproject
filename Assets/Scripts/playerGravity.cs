@@ -6,8 +6,9 @@ public class playerGravity : MonoBehaviour {
 	GameObject 		player;
 	//GameObject 		sink;
 	GameObject[] 	manipulators;
-	float 	G;         	// Gravitational constant: use for scaling
-	float 	M;          // Mass of sink: use for pull intensity
+	float 	k;         	// Constant: use for scaling
+	float 	q1;         // Charge of sink: use for pull intensity
+	float 	q2;			// Charge of particle/player
 	Vector3 r;          // Radius vector between two objects
 	float 	R;          // Magnitude of radius
 	float 	a;          // Magnitude of acceleration
@@ -15,18 +16,18 @@ public class playerGravity : MonoBehaviour {
 	Vector3 dv;         // Change in velocity
 	float 	dt;        	// Time step
 
-	public float intensity; 	// determines how serious it pulls
+	public float intensity = 0; 	// determines how serious it pulls
 
 	// Use this for initialization
 	void Start () {
-		G = 0.1F;
-		dt = 0.1F;
+		k 	= 0.1F;
+		q2  = 1F;
+		dt 	= 0.1F;
 		if (intensity != 0)
-			G = intensity/100;
+			k= intensity/100;
 		
 		player = GameObject.FindWithTag("Player");
 		manipulators = GameObject.FindGameObjectsWithTag("Manipulator");
-		//sink = sinks [0];
 		// Player starts with an initial velocity
 		v = new Vector3(0, 0, 0);
 	}
@@ -36,36 +37,52 @@ public class playerGravity : MonoBehaviour {
 		Vector3 A = new Vector3 (0, 0, 0);
 		foreach (GameObject manipulator in manipulators) {
 
-			M = manipulator.GetComponent<configManipulator> ().intensity;
+            //if object is visible, set intensity, otherwise intensity = 0
+            if(manipulator.GetComponent<configManipulator>().isOn)
+            {
+                q1 = manipulator.GetComponent<configManipulator>().intensity;
+            }
+            else
+            {
+                q1 = 0;
+            }
+
+            
 			if (manipulator.GetComponent<configManipulator> ().isRepulsor) {
-				M *= -1;
+				q1 *= -1;
 			}
 			// radius between the two objects
-			r = manipulator.transform.position - player.transform.position;
+			//r = manipulator.transform.position - player.transform.position;
+			r = player.transform.InverseTransformVector(manipulator.transform.position);
+
 			// magnitude of radius
 			R = r.magnitude;
 
 			// magnitude of acceleration
-			a = G * M / R / R;
+			a = k* q1 / R / R;
 			A += r / R * a;
 
 			// change in velocity
 			dv = dt * A;
 			// velocity
-			v += Vector3.Scale(dv, new Vector3(1,0,1));
+			v += dv;
 		}
 
+		// limit motion to 
+		v = Vector3.Scale(new Vector3(1,0,1), v);
 		// player's new position is the old position + the change in position
-		player.transform.position += v*dt;
+		player.transform.position += player.transform.TransformVector(v*dt);
 	}
 
 	void OnCollisionEnter (Collision collision) {
 		foreach (ContactPoint contact in collision.contacts) {
-			Debug.DrawRay(contact.point, contact.normal, Color.white);
 			// mirror velocity vector over contact.normal
 			Vector3 n;
-			n = Vector3.Normalize(contact.normal); 
+			n = player.transform.InverseTransformVector (contact.normal);
+			n = Vector3.Normalize (n);
 			v = v - 2 * Vector3.Dot(v, n) * n;
 		}
+		v = Vector3.Scale (v, new Vector3 (1, 0, 1));
+		player.transform.position += player.transform.TransformVector(v*dt);
 	}
 }
