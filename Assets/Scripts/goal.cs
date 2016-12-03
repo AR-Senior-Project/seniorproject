@@ -6,7 +6,7 @@ public class goal : MonoBehaviour {
 
 	public GameObject GoalText; //floating text on top of the goal
 	public UIManager uimanager;
-    public Score score;
+    //public Score score;
 
 	// Use this for initialization
 	void Start () {
