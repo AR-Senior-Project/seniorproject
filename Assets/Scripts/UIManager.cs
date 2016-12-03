@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour {
 		foreach (GameObject g in winObjects) {
 			g.SetActive (true);
 		}
-		TotalScore.text = "Total Score: " + score.totalScore.ToString () + " + " + score.levelScore.ToString ();
+		TotalScore.text = "Total Score: " + score.totalScore.ToString () + "\nLevel Score: " + score.levelScore.ToString ();
 	}
 
 	//hides objects with ShowOnPause tag
