@@ -29,7 +29,7 @@ public class goal : MonoBehaviour {
             //goal reached
             //print("GOALLL");
             //text.text = "HIT";
-            score.addPoints();
+            //score.addPoints();
             uimanager.youWin = true; //turns on YouWin text
         }
     }

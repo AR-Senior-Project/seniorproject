@@ -7,9 +7,10 @@ public class Score : MonoBehaviour {
 
 	//public int score; //this is the level's score
 	public int totalScore;
-	public Text text;
+	//public Text text;
     public Timer timer;
     int time;
+	public int levelScore;
 
 	// Use this for initialization
 	void Start () {
@@ -19,12 +20,21 @@ public class Score : MonoBehaviour {
 			PlayerPrefs.SetInt ("totalScore", totalScore);
 		}
 		totalScore = PlayerPrefs.GetInt ("totalScore", totalScore);
-        //score = 0;
+        levelScore = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//text.text = totalScore.ToString ();
+		/* To calculate the levelScore to display at the YouWin screen*/
+		if((int)timer.timeStart < 5) {
+			levelScore = 100;
+		} else {
+			levelScore = 100 - ((int)timer.timeStart - 5);
+		}
+		if(levelScore < 0) {
+			levelScore = 0;
+		}
 	}
 	/*
 	 * This will be called before switching to the next level
@@ -49,5 +59,6 @@ public class Score : MonoBehaviour {
 		PlayerPrefs.SetInt ("totalScore", totalScore);
         print("points: " + points);
         print("total: " + totalScore);
+		/* UIManager takes care of displaying this in the YouWin screen*/
 	}
 }

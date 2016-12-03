@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour {
 	public Timer timer;
 	public bool youWin = false;
 	public Text TotalScore;
-	int levelScore;
+	//int levelScore;
 
 	// Use this for initialization
 	void Start () {
@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour {
 		foreach (GameObject g in winObjects) {
 			g.SetActive (true);
 		}
-		TotalScore.text = "Total Score: " + score.totalScore.ToString () + ((int)timer.timeStart).ToString() + " x " + levelScore.ToString ();
+		TotalScore.text = "Total Score: " + score.totalScore.ToString () + " + " + score.levelScore.ToString ();
 	}
 
 	//hides objects with ShowOnPause tag
