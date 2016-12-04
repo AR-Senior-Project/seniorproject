@@ -6,6 +6,7 @@ public class goal : MonoBehaviour {
 
 	public GameObject GoalText; //floating text on top of the goal
 	public UIManager uimanager;
+    public Score score;
 
 	// Use this for initialization
 	void Start () {
@@ -14,8 +15,10 @@ public class goal : MonoBehaviour {
 	}
 
 	void Update() {
-		if(SceneManager.GetActiveScene ().name.CompareTo("UI") > 0) { //check that this is Level 1
+		if(SceneManager.GetActiveScene ().name.Equals("Level 0")) { //check that this is Level 1
 			GoalText.GetComponent <MeshRenderer>().enabled = true;
+		} else {
+			GoalText.GetComponent<MeshRenderer>().enabled = false;
 		}
 	}
 
@@ -27,8 +30,9 @@ public class goal : MonoBehaviour {
         {
             //goal reached
             //print("GOALLL");
-			//text.text = "HIT";
-			uimanager.youWin = true; //turns on YouWin text
+            //text.text = "HIT";
+            score.addPoints();
+            uimanager.youWin = true; //turns on YouWin text
         }
     }
 	
