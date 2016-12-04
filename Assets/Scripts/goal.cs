@@ -15,8 +15,10 @@ public class goal : MonoBehaviour {
 	}
 
 	void Update() {
-		if(SceneManager.GetActiveScene ().name.CompareTo("UI") > 0) { //check that this is Level 1
+		if(SceneManager.GetActiveScene ().name.Equals("Level 0")) { //check that this is Level 1
 			GoalText.GetComponent <MeshRenderer>().enabled = true;
+		} else {
+			GoalText.GetComponent<MeshRenderer>().enabled = false;
 		}
 	}
 
