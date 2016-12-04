@@ -21,7 +21,7 @@ public class Timer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //when player presses space, start timer and show particle
-		if(Input.GetKeyDown(KeyCode.Space) || Input.touches.Length > 0)
+		if(Input.GetKeyDown(KeyCode.Space) || Input.touches.Length == 1)
         {
             boardVisible = parRen.enabled;
             print(boardVisible);

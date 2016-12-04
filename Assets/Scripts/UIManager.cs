@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//if player presses ESC
-		if(Input.GetKeyDown (KeyCode.Escape)) {
+		if(Input.GetKeyDown (KeyCode.Escape) || Input.touches.Length == 2) {
 			if(Time.timeScale == 1) { //check if time is running
 				Time.timeScale = 0; //stop the time
 				showPaused();
