@@ -14,8 +14,9 @@ public class Score : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//Reset the totalScore when Level 1 is loaded
-		if(SceneManager.GetActiveScene ().name.CompareTo ("Level 1") > 0) { //strings are the same
+		//Reset the totalScore when Level 0 is loaded
+		if(SceneManager.GetActiveScene ().name.CompareTo ("Level 0") == 0) { //strings are the same
+            //print("LEVEL 0");
 			totalScore = 0;
 			PlayerPrefs.SetInt ("totalScore", totalScore);
 		}
