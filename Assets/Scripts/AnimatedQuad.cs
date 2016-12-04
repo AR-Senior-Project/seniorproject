@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿/*
+using UnityEngine;
 using System.Collections;
  
 class AnimateTiledTexture : MonoBehaviour
@@ -39,3 +40,5 @@ class AnimateTiledTexture : MonoBehaviour
  
     }
 }
+
+*/
