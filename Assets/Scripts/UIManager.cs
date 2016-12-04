@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour {
 	GameObject[] winObjects;
 	public Score score;
 	public Timer timer;
-	public bool youWin = false;
+	public bool youWin = true;
 	public Text TotalScore;
 	//int levelScore;
 
@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour {
 		foreach (GameObject g in winObjects) {
 			g.SetActive (true);
 		}
-		TotalScore.text = "Level Score: " + score.levelScore.ToString () + "\nTotal Score: " + score.totalScore.ToString ();
+		TotalScore.text = "Level Score: " + score.levelScore.ToString () + "\nTotal Score: " + PlayerPrefs.GetInt ("totalScore").ToString ();
 	}
 
 	//hides objects with ShowOnPause tag
@@ -94,7 +94,7 @@ public class UIManager : MonoBehaviour {
 	//loads the next level
 	public void LoadLevel(int level) {
 		Time.timeScale = 1; //reset time to normal
-		//score.addPoints ();
+		score.addPoints ();
 		SceneManager.LoadScene (level);
 	}
 

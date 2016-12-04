@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Score : MonoBehaviour {
 
 	//public int score; //this is the level's score
-	public int totalScore;
+	static int totalScore;
 	//public Text text;
     public Timer timer;
     int time;
@@ -15,13 +15,13 @@ public class Score : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//Reset the totalScore when Level 0 is loaded
-		if(SceneManager.GetActiveScene ().name.CompareTo ("Level 0") == 0) { //strings are the same
+
+		if(!PlayerPrefs.HasKey ("totalScore") || SceneManager.GetActiveScene ().name.Equals ("Level 0")) { //strings are the same
             //print("LEVEL 0");
 			totalScore = 0;
 			PlayerPrefs.SetInt ("totalScore", totalScore);
-		}
-		totalScore = PlayerPrefs.GetInt ("totalScore", totalScore);
-        levelScore = 0;
+			PlayerPrefs.Save ();
+		} 
 	}
 	
 	// Update is called once per frame
@@ -56,8 +56,10 @@ public class Score : MonoBehaviour {
         if (points < 0) {
             points = 0;
         }
-        totalScore += points;
+		//totalScore = PlayerPrefs.GetInt ("totalScore");
+        totalScore += levelScore;
 		PlayerPrefs.SetInt ("totalScore", totalScore);
+		PlayerPrefs.Save ();
         print("points: " + points);
         print("total: " + totalScore);
 		/* UIManager takes care of displaying this in the YouWin screen*/
