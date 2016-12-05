@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour {
 	public Timer timer;
 	public bool youWin = true;
 	public Text TotalScore;
+    bool paused = false;    //true if paused
 	//int levelScore;
 
 	// Use this for initialization
@@ -25,15 +26,20 @@ public class UIManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//if player presses ESC
-		if(Input.GetKeyDown (KeyCode.Escape) || Input.touches.Length == 2) {
-			if(Time.timeScale == 1) { //check if time is running
-				Time.timeScale = 0; //stop the time
-				showPaused();
-			} else if(Time.timeScale == 0) { //if time stopped
-				Time.timeScale = 1; //make time run normally
-				hidePaused ();
-			}
-		}
+		if(Input.GetKeyDown (KeyCode.Escape))
+        {
+            //check if paused
+            if (paused)
+            {
+                paused = false;
+                hidePaused();
+            }
+            else
+            {
+                paused = true;
+                showPaused();
+            }
+        }
 		if(youWin) {
 			Time.timeScale = 0; //stop time
 			showWin ();
